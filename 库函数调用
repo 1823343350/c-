@@ -1,0 +1,6 @@
+substr函数
+  假设string s="0123456789";
+  
+  string sub1=s.substr(5);//只有一个数字表示从这个位置开始起一直截取到结尾，也就是sub1="56789"
+  
+  string sub2=s.substr(5,3);//这个表示从下标5起截取3个字符放到sub2中，也就是sub2="567"
