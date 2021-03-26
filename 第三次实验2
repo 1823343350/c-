@@ -1,0 +1,57 @@
+2.国际标准图书编号(ISBN)由破折号分开的10个数字组成，如0-670-82162-4。一个ISBN分成四个部分：组代码，出版社代码，书籍代码（在该出版社内唯一），校验码。
+设计一个Book类：
+（1）有数据成员isbnCode（图书编号）、countryCode（组代码）、publicationCode（出版社代码）、bookCode（书籍代码）、checkCode（校验码）。
+（2）有成员函数SetISBN用于设置isbnCode的值；有成员函数parseISBN用来对isbnCode进行分析,得到countryCode、publicationCode、bookCode和checkCode的值；有成员函数printISBNInfo用于打印图书编号的信息。如对于0-670-82162-4,打印结果如下：
+组织代码：0
+出版社代码：670
+书籍代码：82162
+校验码：4
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book
+{
+public :
+	void setISBNCode(string);
+	void parseISBN();
+	void printISBNInfo();
+private:
+	string isbnCode;
+	string	countryCode,publicationCode,bookCode,checkCode;
+};
+void Book::setISBNCode(string isbn)
+{
+	isbnCode=isbn;
+}
+void Book::parseISBN()
+{
+	int i,j,k,l;
+	i=isbnCode.find("-");
+	k=isbnCode.find("-",i+1);
+	l=isbnCode.find("-",k+1);
+
+	countryCode=isbnCode.substr(0,i);
+	publicationCode=isbnCode.substr(i+1,k-i-1);
+	bookCode=isbnCode.substr(k+1,l-k-1);
+	checkCode=isbnCode.substr(l+1);
+
+
+}
+void Book::printISBNInfo()
+{
+	cout<<"组织代码:"<<countryCode<<endl;
+	cout<<"出版社代码:"<<publicationCode<<endl;
+	cout<<"书籍代码:"<<bookCode<<endl;
+	cout<<"校验码:"<<checkCode<<endl;
+}
+int main()
+{
+	Book b;
+	b.setISBNCode("1000-07411-71478-3");
+	b.parseISBN();
+	b.printISBNInfo();
+	
+	return 0;
+}
